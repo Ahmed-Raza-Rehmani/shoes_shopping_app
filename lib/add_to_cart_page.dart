@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shoes_shopping_app/cart_provider.dart';
-import 'package:shoes_shopping_app/global_variables.dart';
 
 class AddToCartPage extends StatelessWidget {
   const AddToCartPage({super.key});
@@ -13,12 +12,18 @@ class AddToCartPage extends StatelessWidget {
       itemBuilder: (context, index) {
         final cartItem = cartListD[index];
         return ListTile(
-          title: Text(cartItem['title'].toString()),
-
-          subtitle: Text(cartItem['size'].toString()),
           leading: CircleAvatar(
             radius: 30,
             backgroundImage: AssetImage(cartItem['imageUrl'].toString()),
+          ),
+          title: Text(cartItem['title'].toString()),
+
+          subtitle: Text(cartItem['size'].toString()),
+          trailing: IconButton(
+            onPressed: () {
+              context.read<CartProvider>().removeProduct(cartItem);
+            },
+            icon: Icon(Icons.delete),
           ),
         );
       },
