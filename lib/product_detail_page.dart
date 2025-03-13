@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shoes_shopping_app/cart_provider.dart';
-import 'package:shoes_shopping_app/global_variables.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final Map<String, Object> product;
@@ -14,6 +13,25 @@ class ProductDetailPage extends StatefulWidget {
 class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   int selectedsize = 0;
+  void onTap() {
+    if (selectedsize != 0) {
+      Provider.of<CartProvider>(context, listen: false).addProduct({
+        'id': widget.product['id'],
+        'title': widget.product['title'],
+        'price': widget.product['price'],
+        'imageUrl': widget.product['imageUrl'],
+        'company': widget.product['company'],
+        'size': selectedsize,
+      });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Product Added Successfully')));
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Please Select Size')));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +56,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               child: Column(
                 children: [
                   Text(
-                    '\$22.4',
+                    '  \$${widget.product['price']}',
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   SizedBox(
@@ -74,19 +92,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       vertical: 8,
                     ),
                     child: ElevatedButton.icon(
-                      onPressed: () {
-                        Provider.of<CartProvider>(
-                          context,
-                          listen: false,
-                        ).addProduct({
-                          'id': widget.product['id'],
-                          'title': widget.product['title'],
-                          'price': widget.product['price'],
-                          'imageUrl': widget.product['imageUrl'],
-                          'company': widget.product['company'],
-                          'size': selectedsize,
-                        });
-                      },
+                      onPressed: onTap,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
                         minimumSize: Size(double.infinity, 44),
