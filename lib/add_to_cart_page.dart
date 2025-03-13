@@ -7,26 +7,33 @@ class AddToCartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartListD = context.watch<CartProvider>().productL;
-    return ListView.builder(
-      itemCount: cartListD.length,
-      itemBuilder: (context, index) {
-        final cartItem = cartListD[index];
-        return ListTile(
-          leading: CircleAvatar(
-            radius: 30,
-            backgroundImage: AssetImage(cartItem['imageUrl'].toString()),
-          ),
-          title: Text(cartItem['title'].toString()),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Cart', style: Theme.of(context).textTheme.titleLarge),
+      ),
 
-          subtitle: Text(cartItem['size'].toString()),
-          trailing: IconButton(
-            onPressed: () {
-              context.read<CartProvider>().removeProduct(cartItem);
-            },
-            icon: Icon(Icons.delete),
-          ),
-        );
-      },
+      body: ListView.builder(
+        itemCount: cartListD.length,
+        itemBuilder: (context, index) {
+          final cartItem = cartListD[index];
+          return ListTile(
+            leading: CircleAvatar(
+              radius: 30,
+              backgroundImage: AssetImage(cartItem['imageUrl'].toString()),
+            ),
+            title: Text(cartItem['title'].toString()),
+
+            subtitle: Text(cartItem['size'].toString()),
+            trailing: IconButton(
+              onPressed: () {
+                context.read<CartProvider>().removeProduct(cartItem);
+              },
+              icon: Icon(Icons.delete),
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -23,13 +23,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         'company': widget.product['company'],
         'size': selectedsize,
       });
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Product Added Successfully')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: const Text('Product Added Successfully')),
+      );
     } else {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Please Select Size')));
+      ).showSnackBar(SnackBar(content: const Text('Please Select Size')));
     }
   }
 
