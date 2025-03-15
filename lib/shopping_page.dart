@@ -15,7 +15,7 @@ class ShoppingpageState extends State<ShoppingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final border = OutlineInputBorder(
+    final border = const OutlineInputBorder(
       borderSide: BorderSide(color: Color.fromRGBO(165, 165, 165, 1)),
       borderRadius: BorderRadius.horizontal(left: Radius.circular(40)),
     );
@@ -25,21 +25,21 @@ class ShoppingpageState extends State<ShoppingPage> {
           children: [
             Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     'Shoes\nCollection',
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
                       focusedBorder: border,
                       enabledBorder: border,
                       hintText: "Search",
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: const Icon(Icons.search),
                     ),
                   ),
                 ),
@@ -64,13 +64,13 @@ class ShoppingpageState extends State<ShoppingPage> {
                         backgroundColor:
                             seletedfilter == filter
                                 ? Theme.of(context).colorScheme.primary
-                                : Color.fromRGBO(245, 247, 249, 1),
+                                : const Color.fromRGBO(245, 247, 249, 1),
                         label: Text(filter.toString()),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 18,
                           vertical: 13,
                         ),
-                        labelStyle: TextStyle(fontSize: 16),
+                        labelStyle: const TextStyle(fontSize: 16),
                         side: const BorderSide(
                           color: Color.fromRGBO(245, 247, 249, 1),
                         ),
@@ -84,7 +84,7 @@ class ShoppingpageState extends State<ShoppingPage> {
                 },
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
                 itemCount: products.length,

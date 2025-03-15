@@ -6,7 +6,7 @@ class AddToCartPage extends StatelessWidget {
   const AddToCartPage({super.key});
   @override
   Widget build(BuildContext context) {
-    final cartListD = context.watch<CartProvider>().productL;
+    final ProductC = context.watch<CartProvider>().productL;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -14,22 +14,31 @@ class AddToCartPage extends StatelessWidget {
       ),
 
       body: ListView.builder(
-        itemCount: cartListD.length,
+        itemCount: ProductC.length,
         itemBuilder: (context, index) {
-          final cartItem = cartListD[index];
+          final cartItem = ProductC[index];
           return ListTile(
             leading: CircleAvatar(
               radius: 30,
               backgroundImage: AssetImage(cartItem['imageUrl'].toString()),
             ),
-            title: Text(cartItem['title'].toString()),
+            title: Text(
+              cartItem['title'].toString(),
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
 
-            subtitle: Text(cartItem['size'].toString()),
+            subtitle: Text(
+              cartItem['size'].toString(),
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
             trailing: IconButton(
               onPressed: () {
-                context.read<CartProvider>().removeProduct(cartItem);
+                Provider.of<CartProvider>(
+                  context,
+                  listen: false,
+                ).removeProduct(cartItem);
               },
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
             ),
           );
         },

@@ -11,26 +11,15 @@ class ProductDetailPage extends StatefulWidget {
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
-  @override
   int selectedsize = 0;
+
   void onTap() {
-    if (selectedsize != 0) {
-      Provider.of<CartProvider>(context, listen: false).addProduct({
-        'id': widget.product['id'],
-        'title': widget.product['title'],
-        'price': widget.product['price'],
-        'imageUrl': widget.product['imageUrl'],
-        'company': widget.product['company'],
-        'size': selectedsize,
-      });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: const Text('Product Added Successfully')),
-      );
-    } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: const Text('Please Select Size')));
-    }
+    context.read<CartProvider>().addProduct({
+      'imageUrl': widget.product['imageUrl'],
+      'title': widget.product['title'],
+      'price': widget.product['price'],
+      'size': selectedsize,
+    });
   }
 
   @override
@@ -47,12 +36,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               widget.product['title'].toString(),
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            Spacer(flex: 1),
+            const Spacer(flex: 1),
             Image.asset(widget.product['imageUrl'].toString(), height: 250),
-            Spacer(flex: 2),
+            const Spacer(flex: 2),
             Container(
               height: 200,
-              color: Color.fromRGBO(216, 240, 253, 1),
+              color: const Color.fromRGBO(216, 240, 253, 1),
               child: Column(
                 children: [
                   Text(
@@ -95,11 +84,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       onPressed: onTap,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
-                        minimumSize: Size(double.infinity, 44),
+                        minimumSize: const Size(double.infinity, 44),
                       ),
-                      icon: Icon(Icons.shopping_cart, color: Colors.black),
+                      icon: const Icon(
+                        Icons.shopping_cart,
+                        color: Colors.black,
+                      ),
 
-                      label: Text(
+                      label: const Text(
                         'Add To Cart',
                         style: TextStyle(color: Colors.black),
                       ),

@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int currentPage = 0;
 
-  List<Widget> pages = [ShoppingPage(), AddToCartPage()];
+  List<Widget> pages = const [ShoppingPage(), AddToCartPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +24,10 @@ class _HomePageState extends State<HomePage> {
         unselectedFontSize: 0,
         currentIndex: currentPage,
         onTap: (value) {
-          print(value);
           currentPage = value;
           setState(() {});
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(label: '', icon: Icon(Icons.home)),
           BottomNavigationBarItem(label: '', icon: Icon(Icons.shopping_cart)),
         ],
