@@ -33,10 +33,7 @@ class AddToCartPage extends StatelessWidget {
             ),
             trailing: IconButton(
               onPressed: () {
-                Provider.of<CartProvider>(
-                  context,
-                  listen: false,
-                ).removeProduct(cartItem);
+                context.read<CartProvider>().removeProduct(cartItem);
               },
               icon: const Icon(Icons.delete),
             ),

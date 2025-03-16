@@ -16,7 +16,7 @@ class ShoppingpageState extends State<ShoppingPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    int crossAxisCount = size.width > 600 ? 2 : 1;
+
     final border = const OutlineInputBorder(
       borderSide: BorderSide(color: Color.fromRGBO(165, 165, 165, 1)),
       borderRadius: BorderRadius.horizontal(left: Radius.circular(40)),
@@ -88,42 +88,63 @@ class ShoppingpageState extends State<ShoppingPage> {
               ),
             ),
             const SizedBox(height: 10),
-            // Expanded(child:
-            //  GridView.builder(gridDelegate:
-            //  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: )
-            //  : SliverGridDelegateWithFixedCrossAxisCount(
 
-            // ),
-            //itemBuilder: itemBuilder))
             Expanded(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: crossAxisCount,
-                  childAspectRatio: 1.75,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemCount: products.length,
-                itemBuilder: (context, index) {
-                  final productV = products[index];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return ProductDetailPage(product: productV);
+              child:
+                  size.width > 650
+                      ? GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 1.75,
+                            ),
+                        itemCount: products.length,
+                        itemBuilder: (context, index) {
+                          final productV = products[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return ProductDetailPage(product: productV);
+                                  },
+                                ),
+                              );
+                            },
+                            child: ProductData(
+                              title: productV['title'].toString(),
+                              price: productV['price'] as double,
+                              image: productV['imageUrl'].toString(),
+                            ),
+                          );
+                        },
+                      )
+                      : Expanded(
+                        child: ListView.builder(
+                          itemCount: products.length,
+                          itemBuilder: (context, index) {
+                            final productV = products[index];
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return ProductDetailPage(
+                                        product: productV,
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                              child: ProductData(
+                                title: productV['title'].toString(),
+                                price: productV['price'] as double,
+                                image: productV['imageUrl'].toString(),
+                              ),
+                            );
                           },
                         ),
-                      );
-                    },
-                    child: ProductData(
-                      title: productV['title'].toString(),
-                      price: productV['price'] as double,
-                      image: productV['imageUrl'].toString(),
-                    ),
-                  );
-                },
-              ),
+                      ),
             ),
           ],
         ),
