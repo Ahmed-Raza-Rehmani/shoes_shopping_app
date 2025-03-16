@@ -93,7 +93,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       onPressed: onTap,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Theme.of(context).colorScheme.primary,
-                        minimumSize: const Size(double.infinity, 44),
+                        fixedSize: const Size(350, 50),
                       ),
                       icon: const Icon(
                         Icons.shopping_cart,

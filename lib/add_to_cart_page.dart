@@ -28,7 +28,7 @@ class AddToCartPage extends StatelessWidget {
             ),
 
             subtitle: Text(
-              cartItem['size'].toString(),
+              ('size  ${cartItem['size']}').toString(),
               style: Theme.of(context).textTheme.bodySmall,
             ),
             trailing: IconButton(

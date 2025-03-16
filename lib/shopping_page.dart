@@ -15,12 +15,15 @@ class ShoppingpageState extends State<ShoppingPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    int crossAxisCount = size.width > 600 ? 2 : 1;
     final border = const OutlineInputBorder(
       borderSide: BorderSide(color: Color.fromRGBO(165, 165, 165, 1)),
       borderRadius: BorderRadius.horizontal(left: Radius.circular(40)),
     );
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: Column(
           children: [
             Row(
@@ -85,8 +88,21 @@ class ShoppingpageState extends State<ShoppingPage> {
               ),
             ),
             const SizedBox(height: 10),
+            // Expanded(child:
+            //  GridView.builder(gridDelegate:
+            //  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: )
+            //  : SliverGridDelegateWithFixedCrossAxisCount(
+
+            // ),
+            //itemBuilder: itemBuilder))
             Expanded(
-              child: ListView.builder(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount,
+                  childAspectRatio: 1.75,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   final productV = products[index];

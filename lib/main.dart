@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
             titleSmall: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             bodyLarge: TextStyle(fontSize: 25),
             bodyMedium: TextStyle(fontSize: 20),
-            bodySmall: TextStyle(fontSize: 18),
+            bodySmall: TextStyle(fontSize: 16),
           ),
           fontFamily: 'Lato',
           colorScheme: ColorScheme.fromSeed(
